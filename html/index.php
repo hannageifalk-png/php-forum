@@ -1,3 +1,4 @@
 <?php
-require 'includes/menu.php';
-?>
+header("Location: groups.php");
+
+exit;
