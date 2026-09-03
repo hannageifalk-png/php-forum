@@ -122,6 +122,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_post']) && $me
     ]);
 }
 
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST'
+    && isset($_POST['change_role'])
+    && $membership
+    && $membership['role'] === 'admin'
+) {
+
+    $userId = $_POST['user_id'] ?? null;
+    $newRole = $_POST['role'] ?? null;
+
+    if ($userId && in_array($newRole, ['member', 'admin'])) {
+        $updateStmt = $pdo->prepare(
+            "UPDATE users_groups SET role = ? WHERE user_id = ? AND group_id = ?"
+        );
+
+        $updateStmt->execute([
+            $newRole,
+            $userId,
+            $groupId
+        ]);
+
+        echo '<p>User role updated!</p>';
+    }
+
+}
 
 if (!$group) {
 
@@ -162,6 +187,37 @@ foreach ($discussions as $discussion) {
 
 
 if ($membership && $membership['role'] === 'admin') {
+    $memberStmt = $pdo->prepare(
+    "SELECT users.id, users.first_name, users.last_name, users_groups.role
+     FROM users_groups
+     JOIN users ON users.id = users_groups.user_id
+     WHERE users_groups.group_id = ?"
+);
+
+    $memberStmt->execute([$groupId]);
+    $members = $memberStmt->fetchAll();
+
+    foreach ($members as $member) {
+        ?>
+        <form method="POST">
+            <input type="hidden" name="user_id" value="<?= $member['id'] ?>">
+
+            <select name="role">
+                <option value="member">Member</option>
+                <option value="admin">Admin</option>
+            </select>
+
+            <button type="submit" name="change_role">Change role</button>
+        </form>
+        <?php
+
+        echo '<p>';
+        echo htmlspecialchars($member['first_name']) . ' ';
+        echo htmlspecialchars($member['last_name']) . ' - ';
+        echo htmlspecialchars($member['role']);
+        echo '</p>';
+    }
+}
 
 $requestListStmt = $pdo->prepare(
     "SELECT * FROM join_requests WHERE group_id = ? AND status = ?"
@@ -181,8 +237,6 @@ $joinRequests = $requestListStmt->fetchAll();
 
         <?php
     }
-}
-
 } else {
     ?>
 
