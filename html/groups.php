@@ -33,6 +33,13 @@ $stmt->execute();
 $groups = $stmt->fetchAll();
 
 foreach ($groups as $group) {
-    echo '<p>' . htmlspecialchars($group['name']) . '</p>';
-    echo '<a href="individual-group.php?id=' . $group['id'] . '">View Group</a>';
+    echo '<div class="group-card">';
+
+    echo '<h2>' . htmlspecialchars($group['name']) . '</h2>';
+
+    echo '<a class="view-group" href="individual-group.php?id=' . $group['id'] . '">
+            View group
+          </a>';
+
+    echo '</div>';
 }
