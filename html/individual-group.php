@@ -150,8 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_post']) && $me
     ]);
 }
 
-if (
-    $_SERVER['REQUEST_METHOD'] === 'POST'
+if ($_SERVER['REQUEST_METHOD'] === 'POST'
     && isset($_POST['change_role'])
     && $membership
     && $membership['role'] === 'admin'
@@ -160,7 +159,10 @@ if (
         $userId = $_POST['user_id'] ?? null;
         $newRole = $_POST['role'] ?? null;
         
-        if ($userId && in_array($newRole, ['member', 'admin'])) {
+        if ($userId
+            && $userId != $_SESSION['user_id']
+            && in_array($newRole, ['member', 'admin'])
+        ) {
             $updateStmt = $pdo->prepare(
                 "UPDATE users_groups SET role = ? WHERE user_id = ? AND group_id = ?"
             );
@@ -251,8 +253,18 @@ if ($membership && $membership['role'] === 'admin') {
             >
 
             <select name="role">
-                <option value="member">Member</option>
-                <option value="admin">Admin</option>
+                <option
+                    value="member"
+                    <?= $member['role'] === 'member' ? 'selected' : '' ?>
+                >
+                    Member
+                </option>
+                <option
+                    value="admin"
+                    <?= $member['role'] === 'admin' ? 'selected' : '' ?>
+                >
+                    Admin
+                </option>
             </select>
 
             <button type="submit" name="change_role">
