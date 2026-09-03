@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['join_group'])) {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approve_request']) && $membership) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approve_request']) && $membership && $membership['role'] === 'admin') {
 
     $requestId = $_POST['request_id'] ?? null;
 
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_post']) && $me
     ]);
 }
 
-// Visa sidan
+
 if (!$group) {
 
     echo '<p>Group not found.</p>';
@@ -160,6 +160,9 @@ foreach ($discussions as $discussion) {
     echo '</a>';
 }
 
+
+if ($membership && $membership['role'] === 'admin') {
+
 $requestListStmt = $pdo->prepare(
     "SELECT * FROM join_requests WHERE group_id = ? AND status = ?"
     );
@@ -178,6 +181,7 @@ $joinRequests = $requestListStmt->fetchAll();
 
         <?php
     }
+}
 
 } else {
     ?>
@@ -190,4 +194,3 @@ $joinRequests = $requestListStmt->fetchAll();
 
         <?php
     }
-?>
