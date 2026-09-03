@@ -6,14 +6,12 @@ require 'includes/database.php';
 
 $groupId = $_GET['id'] ?? null;
 
-// Hämta gruppen
 $stmt = $pdo->prepare(
     "SELECT * FROM groups WHERE id = ?"
 );
 $stmt->execute([$groupId]);
 $group = $stmt->fetch();
 
-// Kontrollera om användaren är medlem
 if (!isset($_SESSION['user_id'])) {
     echo '<p>You need to log in to view this group.</p>';
     exit;
@@ -23,14 +21,11 @@ $memberStmt = $pdo->prepare(
     "SELECT * FROM users_groups WHERE user_id = ? AND group_id = ?"
 );
 
-
 $memberStmt->execute([$_SESSION['user_id'], $groupId]);
 $membership = $memberStmt->fetch();
 
-// Om användaren klickar på "Join group"
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['join_group'])) {
 
-    // Kontrollera om det redan finns en väntande ansökan
     $requestStmt = $pdo->prepare(
         "SELECT * FROM join_requests 
          WHERE user_id = ? AND group_id = ? AND status = ?"
@@ -44,14 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['join_group'])) {
 
     $existingRequest = $requestStmt->fetch();
 
-    // Om ansökan redan finns
     if ($existingRequest) {
 
         echo '<p>You have already sent a join request for this group.</p>';
 
     } else {
 
-        // Annars skapar vi en ny ansökan
         $joinStmt = $pdo->prepare(
             "INSERT INTO join_requests (user_id, group_id, status)
              VALUES (?, ?, ?)"
@@ -67,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['join_group'])) {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approve_request'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approve_request']) && $membership) {
 
     $requestId = $_POST['request_id'] ?? null;
 
@@ -100,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['approve_request'])) {
     echo '<p>Join request approved!</p>';
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_post'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_post']) && $membership) {
 
     $subject = $_POST['subject'] ?? '';
     $content = $_POST['content'] ?? '';
@@ -165,13 +158,14 @@ foreach ($discussions as $discussion) {
     echo '<a href="discussion.php?id=' . $discussion['id'] . '">';
     echo '<h3>' . htmlspecialchars($discussion['subject']) . '</h3>';
     echo '</a>';
+}
 
-    $requestListStmt = $pdo->prepare(
-        "SELECT * FROM join_requests WHERE group_id = ? AND status = ?"
+$requestListStmt = $pdo->prepare(
+    "SELECT * FROM join_requests WHERE group_id = ? AND status = ?"
     );
 
-    $requestListStmt->execute([$groupId, 'pending']);
-    $joinRequests = $requestListStmt->fetchAll();
+$requestListStmt->execute([$groupId, 'pending']);
+$joinRequests = $requestListStmt->fetchAll();
 
     foreach ($joinRequests as $request) {
         echo '<p>User ID: ' . $request['user_id'] . '</p>';
@@ -185,7 +179,6 @@ foreach ($discussions as $discussion) {
         <?php
     }
 
-}
 } else {
     ?>
 
