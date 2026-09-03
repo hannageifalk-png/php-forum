@@ -37,7 +37,7 @@ if (isset($_SESSION['user_id'])) {
 
             <?php if ($loggedInUser): ?>
                 <li class="logged-in-user">
-                    Välkommen, <?= htmlspecialchars($loggedInUser['first_name']) ?>
+                    Welcome, <?= htmlspecialchars($loggedInUser['first_name']) ?>
                 </li>
             <?php endif; ?>
 
