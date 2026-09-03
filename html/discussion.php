@@ -10,7 +10,6 @@ if (!$discussionId) {
     exit;
 }
 
-// Hämta diskussionen
 $stmt = $pdo->prepare(
     "SELECT * FROM discussions WHERE id = ?"
 );
@@ -22,7 +21,23 @@ if (!$discussion) {
     exit;
 }
 
-// Hantera svar innan något HTML-innehåll skrivs ut
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$memberStmt = $pdo->prepare(
+    "SELECT * FROM users_groups WHERE user_id = ? AND group_id = ?"
+);
+
+$memberStmt->execute([$_SESSION['user_id'], $discussion['group_id']]);
+$membership = $memberStmt->fetch();
+
+if (!$membership) {
+    header("Location: individual-group.php?id=" . $discussion['group_id']);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reply'])) {
 
     $content = $_POST['content'] ?? '';
@@ -46,22 +61,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reply'])) {
     }
 }
 
-// Menyn kommer först efter all kod som kan använda header()
 require 'includes/menu.php';
 
-// Visa diskussionen
 echo '<h1>' . htmlspecialchars($discussion['subject']) . '</h1>';
 echo '<p>Created by User ID: ' . $discussion['user_id'] . '</p>';
 echo '<h2>Posts</h2>';
 
-// Hämta alla posts/svar
 $postsStmt = $pdo->prepare(
     "SELECT * FROM posts WHERE discussion_id = ?"
 );
 $postsStmt->execute([$discussionId]);
 $posts = $postsStmt->fetchAll();
 
-// Visa alla posts
 foreach ($posts as $post) {
     echo '<div>';
     echo '<p>' . htmlspecialchars($post['content']) . '</p>';
