@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require 'includes/menu.php';
 require 'includes/database.php';
 require 'includes/functions.php';
