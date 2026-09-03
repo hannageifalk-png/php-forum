@@ -41,9 +41,9 @@ if (!$membership) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reply'])) {
 
     $content = $_POST['content'] ?? '';
-    $userId = $_SESSION['user_id'] ?? null;
+    $userId = $_SESSION['user_id'];
 
-    if ($content && $userId) {
+    if ($content) {
 
         $replyStmt = $pdo->prepare(
             "INSERT INTO posts (discussion_id, user_id, content)
