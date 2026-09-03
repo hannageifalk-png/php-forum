@@ -4,7 +4,6 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
 
-    // GET → visa formuläret
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         ?>
         
@@ -18,7 +17,6 @@ if (isset($_SESSION['user_id'])) {
         <?php
     }
 
-    // POST → ta emot formuläret
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $groupName = $_POST['name'] ?? '';
 
@@ -26,13 +24,13 @@ if (isset($_SESSION['user_id'])) {
             $stmt = $pdo->prepare(
                 "INSERT INTO groups (name, created_by) VALUES (?, ?)"
             );
+            
             $stmt->execute([$groupName, $_SESSION['user_id']]);
             $groupId = $pdo->lastInsertId();
-            header("Location: individual-group.php?id=" . $groupId);
-            exit;
-
+           
             $memberStmt = $pdo->prepare(
-                "INSERT INTO users_groups (user_id, group_id, role) VALUES (?, ?, ?)"
+                "INSERT INTO users_groups (user_id, group_id, role) 
+                VALUES (?, ?, ?)"
             );
 
             $memberStmt->execute([
@@ -40,7 +38,10 @@ if (isset($_SESSION['user_id'])) {
                 $groupId,
                 'admin'
             ]);
-            echo '<p>Group "' . htmlspecialchars($groupName) . '" created successfully!</p>';
+
+            header("Location: individual-group.php?id=" . $groupId);
+            exit;
+
         } else {
             echo '<p>Please enter a group name.</p>';
         }
