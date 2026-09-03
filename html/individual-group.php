@@ -184,21 +184,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
         echo '<p>Group not found.</p>';
         
     } elseif ($membership) {
-        
-        echo '<h1>' . htmlspecialchars($group['name']) . '</h1>';
-        echo '<p>ID: ' . $group['id'] . '</p>';
         ?>
-    <h2>Create post</h2>
-    
-    <form method="POST">
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required>
+        <div class="group-header">
+        <h1><?= htmlspecialchars($group['name']) ?></h1>
+        <p>Group ID: <?= $group['id'] ?></p>
+    </div>
         
-        <label for="content">Post:</label>
-        <textarea id="content" name="content" required></textarea>
-        
-        <button type="submit" name="create_post">Create post</button>
-    </form>
+    <div class="create-post-box">
+        <h2>Create post</h2>
+
+        <form method="POST">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+
+            <label for="content">Post:</label>
+            <textarea id="content" name="content" required></textarea>
+
+            <button type="submit" name="create_post">Create post</button>
+        </form>
+    </div>
     
     <?php
 
@@ -211,9 +215,12 @@ $discussionStmt->execute([$groupId]);
 $discussions = $discussionStmt->fetchAll();
 
 foreach ($discussions as $discussion) {
+    echo '<div class="discussion-card">';
     echo '<a href="discussion.php?id=' . $discussion['id'] . '">';
     echo '<h3>' . htmlspecialchars($discussion['subject']) . '</h3>';
+    echo '<span>View discussion →</span>';
     echo '</a>';
+    echo '</div>';
 }
     }
 
@@ -233,48 +240,38 @@ if ($membership && $membership['role'] === 'admin') {
     $memberStmt->execute([$groupId]);
     $members = $memberStmt->fetchAll();
 
-    echo '<h2>Group members</h2>';
+    ?>
+    <div class="admin-box">
+    <h2>Group members</h2>
 
-    foreach ($members as $member) {
+    <?php foreach ($members as $member) { ?>
+        <div class="member-row">
+            <p>
+                <?= htmlspecialchars($member['first_name']) ?>
+                <?= htmlspecialchars($member['last_name']) ?>
+                -
+                <?= htmlspecialchars($member['role']) ?>
+            </p>
 
-        echo '<p>';
-        echo htmlspecialchars($member['first_name']) . ' ';
-        echo htmlspecialchars($member['last_name']) . ' - ';
-        echo htmlspecialchars($member['role']);
-        echo '</p>';
+            <form method="POST">
+                <input type="hidden" name="user_id" value="<?= $member['id'] ?>">
 
-        ?>
+                <select name="role">
+                    <option value="member" <?= $member['role'] === 'member' ? 'selected' : '' ?>>
+                        Member
+                    </option>
+                    <option value="admin" <?= $member['role'] === 'admin' ? 'selected' : '' ?>>
+                        Admin
+                    </option>
+                </select>
 
-        <form method="POST">
-            <input
-                type="hidden"
-                name="user_id"
-                value="<?= $member['id'] ?>"
-            >
+                <button type="submit" name="change_role">Change role</button>
+            </form>
+        </div>
+    <?php } ?>
+</div>
 
-            <select name="role">
-                <option
-                    value="member"
-                    <?= $member['role'] === 'member' ? 'selected' : '' ?>
-                >
-                    Member
-                </option>
-                <option
-                    value="admin"
-                    <?= $member['role'] === 'admin' ? 'selected' : '' ?>
-                >
-                    Admin
-                </option>
-            </select>
-
-            <button type="submit" name="change_role">
-                Change role
-            </button>
-        </form>
-
-        <?php
-    }
-
+<?php
     $requestListStmt = $pdo->prepare(
         "SELECT * FROM join_requests
          WHERE group_id = ? AND status = ?"
@@ -287,31 +284,26 @@ if ($membership && $membership['role'] === 'admin') {
 
     $joinRequests = $requestListStmt->fetchAll();
 
-    echo '<h2>Join requests</h2>';
-
-    foreach ($joinRequests as $request) {
-
-        echo '<p>User ID: ' . htmlspecialchars($request['user_id']) . '</p>';
-
-        ?>
-
-        <form method="POST">
-            <input
-                type="hidden"
-                name="request_id"
-                value="<?= $request['id'] ?>"
-            >
-
-            <button type="submit" name="approve_request">
-                Approve
-            </button>
-        </form>
-
-        <?php
-    }
-} else {
     ?>
+    
+    <div class="admin-box">
+    <h2>Join requests</h2>
 
+    <?php foreach ($joinRequests as $request) { ?>
+        <div class="request-row">
+            <p>User ID: <?= htmlspecialchars($request['user_id']) ?></p>
+
+            <form method="POST">
+                <input type="hidden" name="request_id" value="<?= $request['id'] ?>">
+                <button type="submit" name="approve_request">Approve</button>
+            </form>
+        </div>
+    <?php } ?>
+</div>
+
+<?php
+} else {
+?>
     <p>You are not a member of this group.</p>
 
     <form method="POST">
@@ -320,3 +312,4 @@ if ($membership && $membership['role'] === 'admin') {
 
 <?php
 }
+

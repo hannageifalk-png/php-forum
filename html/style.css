@@ -140,3 +140,104 @@ button:hover {
     background-color: #1d4ed8;
     text-decoration: none;
 }
+
+.group-header {
+    margin: 30px 40px 20px;
+}
+
+.group-header h1 {
+    margin: 0 0 5px;
+}
+
+.group-header p {
+    margin: 0;
+    color: #666;
+}
+
+.discussion-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 15px 40px;
+    max-width: 700px;
+}
+
+.discussion-card h3 {
+    margin: 0 0 10px;
+    color: #1f2937;
+}
+
+.discussion-card a {
+    text-decoration: none;
+}
+
+.discussion-card span {
+    color: #2563eb;
+    font-size: 14px;
+}
+
+.discussion-card:hover {
+    border-color: #bbb;
+}
+
+.create-post-box {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 20px 40px;
+    max-width: 700px;
+}
+
+.create-post-box h2 {
+    margin-top: 0;
+}
+
+.create-post-box form {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.admin-box {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 20px 40px;
+    max-width: 700px;
+}
+
+.admin-box h2 {
+    margin-top: 0;
+}
+
+.member-row,
+.request-row {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.member-row:last-child,
+.request-row:last-child {
+    border-bottom: none;
+}
+
+.member-row p,
+.request-row p {
+    margin: 0 0 10px;
+}
+
+.member-row form,
+.request-row form {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.member-row select {
+    max-width: 180px;
+}
