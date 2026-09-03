@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="style.css">
 <nav>
     <ul>
         <li><a href="/">Home</a></li>
