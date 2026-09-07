@@ -363,3 +363,56 @@ button:hover {
     text-decoration: none;
 }
 
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 40px;
+    max-width: 700px;
+}
+
+.post-card .avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.post-author {
+    display: inline-block;
+    margin: 0;
+    font-weight: bold;
+    color: #374151;
+}
+
+.post-card > p:not(.post-author) {
+    margin: 15px 0 0;
+    line-height: 1.6;
+}
+
+.member-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.member-info p {
+    margin: 0;
+}
+
+.member-info .avatar {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}

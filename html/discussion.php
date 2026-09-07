@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-require 'includes/database.php';
+require_once 'includes/database.php';
+require_once 'includes/functions.php';
 
 $discussionId = $_GET['id'] ?? null;
 
@@ -68,16 +69,31 @@ echo '<p>Created by User ID: ' . $discussion['user_id'] . '</p>';
 echo '<h2>Posts</h2>';
 
 $postsStmt = $pdo->prepare(
-    "SELECT * FROM posts WHERE discussion_id = ?"
+    "SELECT 
+    posts.*,
+    users.first_name,
+    users.last_name,
+    users.email
+    FROM posts
+    JOIN users ON posts.user_id = users.id
+    WHERE posts.discussion_id = ?"
 );
 $postsStmt->execute([$discussionId]);
 $posts = $postsStmt->fetchAll();
 
 foreach ($posts as $post) {
-    echo '<div>';
-    echo '<p>' . htmlspecialchars($post['content']) . '</p>';
-    echo '<p>Posted by User ID: ' . $post['user_id'] . '</p>';
-    echo '</div>';
+    ?>
+    <div class="member-info">
+    <?php
+        $gravatarUrl = getGravatarUrl($post['email']);
+        echo '<div class="post-card">';
+        echo '<img class="avatar" src="' . $gravatarUrl . '" alt="Profile picture">';
+        echo '<p class="post-author">Posted by: ' . htmlspecialchars($post['first_name']) . ' ' . htmlspecialchars($post['last_name']) . '</p>';
+        echo '<p>' . htmlspecialchars($post['content']) . '</p>';
+        echo '</div>';
+    ?>
+    </div>
+    <?php
 }
 
 ?>

@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-require 'includes/database.php';
+require_once 'includes/database.php';
+require_once 'includes/functions.php';
 
 $groupId = $_GET['id'] ?? null;
 
@@ -231,7 +232,8 @@ if ($membership && $membership['role'] === 'admin') {
             users.id,
             users.first_name,
             users.last_name,
-            users_groups.role
+            users_groups.role,
+            users.email
          FROM users_groups
          JOIN users ON users.id = users_groups.user_id
          WHERE users_groups.group_id = ?"
@@ -242,16 +244,23 @@ if ($membership && $membership['role'] === 'admin') {
 
     ?>
     <div class="admin-box">
-    <h2>Group members</h2>
-
-    <?php foreach ($members as $member) { ?>
+        <h2>Group members</h2>
+        
+        <?php 
+    foreach ($members as $member) { ?>
         <div class="member-row">
+
+        <div class="member-info">
+
+            <img class="avatar" src="<?= getGravatarUrl($member['email']) ?>" alt="Profile picture">
+            
             <p>
                 <?= htmlspecialchars($member['first_name']) ?>
                 <?= htmlspecialchars($member['last_name']) ?>
                 -
                 <?= htmlspecialchars($member['role']) ?>
             </p>
+        </div>
 
             <form method="POST">
                 <input type="hidden" name="user_id" value="<?= $member['id'] ?>">
@@ -268,7 +277,9 @@ if ($membership && $membership['role'] === 'admin') {
                 <button type="submit" name="change_role">Change role</button>
             </form>
         </div>
-    <?php } ?>
+    <?php
+    } 
+    ?>
 </div>
 
 <?php
