@@ -9,9 +9,23 @@ body {
     color: #222;
 }
 
+/* NAVBAR */
+
 nav {
-    background-color: #1f2937;
+    display: flex;
+    align-items: center;
+    min-height: 65px;
     padding: 0 40px;
+    background-color: #1f2937;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
 }
 
 nav ul {
@@ -24,19 +38,38 @@ nav ul {
     min-height: 65px;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
 
 .logged-in-user {
-    margin-left: auto;
+    margin: 0;
     color: white;
 }
+
+.nav-top {
+    display: flex;
+    align-items: center;
+}
+
+.nav-brand {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    list-style: none;
+    margin: 0 0 0 auto;
+    padding: 0;
+}
+
+/* GENERAL TYPOGRAPHY */
 
 h1 {
     color: #1f2937;
@@ -64,6 +97,8 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* FORMS */
 
 form {
     max-width: 500px;
@@ -112,6 +147,8 @@ button:hover {
     background-color: #1d4ed8;
 }
 
+/* GROUP CARDS */
+
 .group-card {
     background-color: white;
     border: 1px solid #ddd;
@@ -141,6 +178,8 @@ button:hover {
     text-decoration: none;
 }
 
+/* GROUP HEADER */
+
 .group-header {
     margin: 30px 40px 20px;
 }
@@ -153,6 +192,8 @@ button:hover {
     margin: 0;
     color: #666;
 }
+
+/* DISCUSSIONS */
 
 .discussion-card {
     background-color: white;
@@ -181,6 +222,8 @@ button:hover {
     border-color: #bbb;
 }
 
+/* CREATE POST */
+
 .create-post-box {
     background-color: white;
     border: 1px solid #ddd;
@@ -200,6 +243,8 @@ button:hover {
     border: none;
     background: none;
 }
+
+/* ADMIN */
 
 .admin-box {
     background-color: white;
@@ -242,6 +287,7 @@ button:hover {
     max-width: 180px;
 }
 
+/* HERO */
 
 .hero {
     display: flex;
@@ -299,6 +345,8 @@ button:hover {
     text-decoration: none;
 }
 
+/* WHY JOIN */
+
 .why-join {
     padding: 60px 40px;
     background-color: white;
@@ -334,6 +382,8 @@ button:hover {
     color: #555;
 }
 
+/* CTA */
+
 .cta {
     text-align: center;
     padding: 70px 40px;
@@ -363,12 +413,33 @@ button:hover {
     text-decoration: none;
 }
 
+/* AVATARS */
+
 .avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
 }
+
+.member-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.member-info p {
+    margin: 0;
+}
+
+.member-info .avatar {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+/* POSTS */
 
 .post-card {
     background-color: white;
@@ -400,19 +471,158 @@ button:hover {
     line-height: 1.6;
 }
 
-.member-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-}
+/* MOBILE */
 
-.member-info p {
-    margin: 0;
-}
+@media (max-width: 768px) {
 
-.member-info .avatar {
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0;
+    nav {
+        display: block;
+        padding: 15px 20px;
+        background-color: #1f2937;
+    }
+
+    .nav-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .nav-brand {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin: 0;
+        padding: 0;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    nav ul.nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+
+        width: 180px;
+        min-height: 0;
+
+        margin: 20px 0 0 auto;
+        padding: 0;
+
+        list-style: none;
+    }
+
+    nav ul.nav-links.open {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li a {
+        display: block;
+        margin: 0;
+        padding: 0;
+        color: white;
+    }
+
+    .logged-in-user {
+        margin: 0;
+        color: white;
+    }
+
+    .hero {
+        flex-direction: column;
+        gap: 30px;
+        padding: 40px 20px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero-image {
+        max-width: 100%;
+    }
+
+    .hero h1 {
+        margin: 0 0 20px;
+        font-size: 38px;
+        text-align: center;
+    }
+
+    .hero p {
+        margin: 0 auto 30px;
+    }
+
+    .why-join {
+        padding: 45px 20px;
+    }
+
+    .benefits {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .benefit-card {
+        width: 100%;
+    }
+
+    .cta {
+        padding: 50px 20px;
+    }
+
+    h1 {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    p,
+    h2,
+    h3,
+    body > a,
+    body > form {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    form {
+        width: auto;
+        max-width: none;
+    }
+
+    .group-card,
+    .discussion-card,
+    .create-post-box,
+    .admin-box,
+    .post-card {
+        margin-left: 20px;
+        margin-right: 20px;
+        max-width: none;
+    }
+
+    .group-header {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .member-row form,
+    .request-row form,
+    .create-post-box form {
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
