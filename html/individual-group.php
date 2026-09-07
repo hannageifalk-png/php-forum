@@ -24,6 +24,10 @@ $memberStmt = $pdo->prepare(
 $memberStmt->execute([$_SESSION['user_id'], $groupId]);
 $membership = $memberStmt->fetch();
 
+var_dump($_SESSION['user_id']);
+var_dump($groupId);
+var_dump($membership);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['join_group'])) {
     
     $requestStmt = $pdo->prepare(
@@ -60,8 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['join_group'])) {
     }
 }
 
-if (
-    $_SERVER['REQUEST_METHOD'] === 'POST'
+if ($_SERVER['REQUEST_METHOD'] === 'POST'
     && isset($_POST['approve_request'])
     && $membership
     && $membership['role'] === 'admin'
@@ -177,6 +180,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'
             echo '<p>User role updated!</p>';
         }
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' 
+        && isset($_POST['create_invitation'])   
+        && $membership 
+        && $membership['role'] === 'admin') {
+        
+        $token = bin2hex(random_bytes(32));
+
+        $expiresAt = date('Y-m-d H:i:s', strtotime('+24 hours'));
+        
+        $invitationStmt = $pdo->prepare(
+            "INSERT INTO group_invitations (group_id, created_by, token, expires_at)
+             VALUES (?, ?, ?, ?)"
+        );
+        
+        $invitationStmt->execute([
+            $groupId,
+            $_SESSION['user_id'],
+            $token,
+            $expiresAt
+        ]);
+        
+        echo '<p>Invitation link created: <a href="join-group.php?token=' . htmlspecialchars($token) . '">Join Group</a></p>';
+    }
     
     require 'includes/menu.php';
 
@@ -223,7 +250,6 @@ foreach ($discussions as $discussion) {
     echo '</a>';
     echo '</div>';
 }
-    }
 
 if ($membership && $membership['role'] === 'admin') {
 
@@ -312,7 +338,13 @@ if ($membership && $membership['role'] === 'admin') {
     <?php } ?>
 </div>
 
+<form method="POST">
+    <button type="submit" name="create_invitation">
+        Create invitation link
+    </button>
+</form>
 <?php
+}
 } else {
 ?>
     <p>You are not a member of this group.</p>
@@ -323,4 +355,3 @@ if ($membership && $membership['role'] === 'admin') {
 
 <?php
 }
-
