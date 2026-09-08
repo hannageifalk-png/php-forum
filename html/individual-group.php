@@ -255,8 +255,61 @@ if (
     ]);
 
     $invitationLink =
-    'http://localhost:8080/join-group.php?token=' .
-    urlencode($token);
+        'http://localhost:8080/join-group.php?token=' .
+        urlencode($token);
+}
+
+
+/* LEAVE GROUP */
+
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST'
+    && isset($_POST['leave_group'])
+    && $membership
+) {
+
+    $canLeave = true;
+
+    if ($membership['role'] === 'admin') {
+
+        $adminStmt = $pdo->prepare(
+            "SELECT COUNT(*) FROM users_groups
+             WHERE group_id = ?
+             AND role = ?"
+        );
+
+        $adminStmt->execute([
+            $groupId,
+            'admin'
+        ]);
+
+        $adminCount = $adminStmt->fetchColumn();
+
+        if ($adminCount <= 1) {
+
+            $canLeave = false;
+
+            $message =
+                'You must make another member admin before leaving the club.';
+        }
+    }
+
+    if ($canLeave) {
+
+        $leaveStmt = $pdo->prepare(
+            "DELETE FROM users_groups
+             WHERE user_id = ?
+             AND group_id = ?"
+        );
+
+        $leaveStmt->execute([
+            $_SESSION['user_id'],
+            $groupId
+        ]);
+
+        header("Location: my-groups.php");
+        exit;
+    }
 }
 
 
@@ -458,7 +511,6 @@ require 'includes/menu.php';
 
                     <h3>Members</h3>
 
-
                     <?php foreach ($members as $member): ?>
 
                         <div class="member-row">
@@ -607,7 +659,7 @@ require 'includes/menu.php';
                     </form>
 
 
-                   <?php if (isset($invitationLink)): ?>
+                    <?php if (isset($invitationLink)): ?>
 
                         <div class="invitation-result">
 
@@ -639,6 +691,23 @@ require 'includes/menu.php';
         </div>
 
     <?php endif; ?>
+
+
+    <div class="leave-club-section">
+
+        <form method="POST">
+
+            <button
+                type="submit"
+                name="leave_group"
+                class="danger-button"
+            >
+                Leave club
+            </button>
+
+        </form>
+
+    </div>
 
 
 <?php else: ?>

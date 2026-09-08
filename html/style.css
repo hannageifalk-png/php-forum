@@ -806,7 +806,7 @@ button:hover {
 /* CLUB MANAGEMENT */
 
 .club-management {
-    max-width: 900px;
+    max-width: 780px;
     margin: 0 auto 60px;
     padding: 0 40px;
 }
@@ -1079,6 +1079,63 @@ button:hover {
 .cta-button:hover {
     background-color: #1d4ed8;
     text-decoration: none;
+}
+
+/* LEAVE CLUB */
+
+.leave-club-section {
+    max-width: 780px;
+    margin: 30px auto 60px;
+    padding: 0 40px;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+.leave-club-section form {
+    margin: 0;
+    padding: 0;
+
+    background: none;
+    border: none;
+}
+
+.danger-button {
+    padding: 10px 18px;
+
+    background: #dc2626;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.danger-button:hover {
+    background: #b91c1c;
+}
+
+.leave-club-section {
+    max-width: 760px;
+    margin: 0 auto 50px;
+    padding: 0 40px;
+}
+
+.leave-club-section form {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.danger-button {
+    background: #dc2626;
+}
+
+.danger-button:hover {
+    background: #b91c1c;
 }
 
 /* AVATARS */
@@ -1620,7 +1677,7 @@ button:hover {
     }
 
     .invite-card {
-        grid-column: auto;
+        grid-column: 1 / -1;
     }
 
     .member-row {
@@ -1860,6 +1917,27 @@ button:hover {
         margin: 20px 20px 0;
     }
 
+/* LEAVE CLUB - MOBILE */
+
+.leave-club-section {
+    width: auto;
+    max-width: none;
+    margin: 20px 20px 50px;
+    padding: 0;
+
+    display: block;
 }
+
+.leave-club-section form {
+    width: 100%;
+    margin: 0;
+}
+
+.leave-club-section .danger-button {
+    width: 100%;
+}
+}
+
+
 
 
