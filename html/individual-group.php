@@ -312,6 +312,88 @@ if (
     }
 }
 
+/* DELETE GROUP */
+
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST'
+    && isset($_POST['delete_group'])
+    && $membership
+    && $membership['role'] === 'admin'
+) {
+
+    try {
+
+        $pdo->beginTransaction();
+
+
+        /* DELETE POSTS */
+
+        $deletePostsStmt = $pdo->prepare(
+            "DELETE FROM posts
+             WHERE discussion_id IN (
+                 SELECT id
+                 FROM discussions
+                 WHERE group_id = ?
+             )"
+        );
+
+        $deletePostsStmt->execute([$groupId]);
+
+
+        /* DELETE DISCUSSIONS */
+
+        $deleteDiscussionsStmt = $pdo->prepare(
+            "DELETE FROM discussions
+             WHERE group_id = ?"
+        );
+
+        $deleteDiscussionsStmt->execute([$groupId]);
+
+
+        /* DELETE JOIN REQUESTS */
+
+        $deleteRequestsStmt = $pdo->prepare(
+            "DELETE FROM join_requests
+             WHERE group_id = ?"
+        );
+
+        $deleteRequestsStmt->execute([$groupId]);
+
+
+        /* DELETE MEMBERSHIPS */
+
+        $deleteMembersStmt = $pdo->prepare(
+            "DELETE FROM users_groups
+             WHERE group_id = ?"
+        );
+
+        $deleteMembersStmt->execute([$groupId]);
+
+
+        /* DELETE GROUP */
+
+        $deleteGroupStmt = $pdo->prepare(
+            "DELETE FROM groups
+             WHERE id = ?"
+        );
+
+        $deleteGroupStmt->execute([$groupId]);
+
+
+        $pdo->commit();
+
+        header("Location: my-groups.php");
+        exit;
+
+    } catch (Exception $e) {
+
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+
+        $message = 'The club could not be deleted.';
+    }
+}
 
 /* LOAD PAGE DATA */
 
@@ -696,7 +778,6 @@ require 'includes/menu.php';
     <div class="leave-club-section">
 
         <form method="POST">
-
             <button
                 type="submit"
                 name="leave_group"
@@ -704,8 +785,24 @@ require 'includes/menu.php';
             >
                 Leave club
             </button>
-
         </form>
+
+        <?php if ($membership['role'] === 'admin'): ?>
+
+            <form
+                method="POST"
+                onsubmit="return confirm('Are you sure you want to permanently delete this club?');"
+            >
+                <button
+                    type="submit"
+                    name="delete_group"
+                    class="delete-button"
+                >
+                    Delete club
+                </button>
+            </form>
+
+        <?php endif; ?>
 
     </div>
 

@@ -1090,6 +1090,7 @@ button:hover {
 
     display: flex;
     justify-content: flex-end;
+    gap: 10px;
 }
 
 .leave-club-section form {
@@ -1100,7 +1101,8 @@ button:hover {
     border: none;
 }
 
-.danger-button {
+.danger-button,
+.delete-button {
     padding: 10px 18px;
 
     background: #dc2626;
@@ -1136,6 +1138,14 @@ button:hover {
 
 .danger-button:hover {
     background: #b91c1c;
+}
+
+.delete-button {
+    background: #991b1b;
+}
+
+.delete-button:hover {
+    background: #7f1d1d;
 }
 
 /* AVATARS */
@@ -1917,25 +1927,27 @@ button:hover {
         margin: 20px 20px 0;
     }
 
-/* LEAVE CLUB - MOBILE */
+    /* LEAVE CLUB - MOBILE */
 
-.leave-club-section {
-    width: auto;
-    max-width: none;
-    margin: 20px 20px 50px;
-    padding: 0;
+    .leave-club-section {
+        width: auto;
+        max-width: none;
+        margin: 20px 20px 50px;
+        padding: 0;
 
-    display: block;
-}
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-.leave-club-section form {
-    width: 100%;
-    margin: 0;
-}
+    .leave-club-section form {
+        width: 100%;
+    }
 
-.leave-club-section .danger-button {
-    width: 100%;
-}
+    .leave-club-section .danger-button,
+    .leave-club-section .delete-button {
+        width: 100%;
+    }
 }
 
 
