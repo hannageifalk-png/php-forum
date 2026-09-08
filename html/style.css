@@ -486,6 +486,88 @@ button:hover {
     transform: translateY(-2px);
 }
 
+/* CREATE GROUP */
+
+.create-group-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 40px 70px;
+}
+
+.create-group-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.create-group-header span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: #2563eb;
+}
+
+.create-group-header h1 {
+    margin: 0 0 15px;
+    font-size: 38px;
+}
+
+.create-group-header p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.create-group-card {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 35px;
+
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-top: 4px solid #2563eb;
+    border-radius: 10px;
+}
+
+.create-group-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 20px;
+
+    background-color: #f3f4f6;
+    border-radius: 50%;
+    font-size: 26px;
+}
+
+.create-group-card h2 {
+    margin: 0 0 10px;
+    text-align: center;
+}
+
+.create-group-card > p {
+    margin: 0 0 25px;
+    text-align: center;
+    color: #6b7280;
+}
+
+.create-group-card form {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.create-group-card button {
+    width: 100%;
+}
+
 /* ADMIN */
 
 .admin-box {
@@ -1001,5 +1083,17 @@ button:hover {
 
     .discover-group-card {
         padding: 20px;
+    }
+
+    .create-group-page {
+    padding: 35px 20px 50px;
+    }
+
+    .create-group-header h1 {
+        font-size: 30px;
+    }
+
+    .create-group-card {
+        padding: 25px 20px;
     }
 }
