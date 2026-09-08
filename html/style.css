@@ -1072,6 +1072,90 @@ button:hover {
     line-height: 1.6;
 }
 
+/* AUTH PAGES */
+
+.auth-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 40px 70px;
+}
+
+.auth-header {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.auth-header span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: #2563eb;
+}
+
+.auth-header h1 {
+    margin: 0 0 15px;
+    font-size: 38px;
+}
+
+.auth-header p {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.auth-card {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 32px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-top: 4px solid #2563eb;
+    border-radius: 10px;
+}
+
+.auth-card h2 {
+    margin: 0 0 24px;
+}
+
+.auth-card form {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.auth-card button {
+    width: 100%;
+}
+
+.auth-error {
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    color: #b91c1c;
+}
+
+.auth-switch {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.auth-switch p {
+    margin: 0;
+    color: #6b7280;
+}
+
+.auth-switch a {
+    font-weight: bold;
+}
+
 /* FOOTER */
 
 .site-footer {
@@ -1610,5 +1694,19 @@ button:hover {
         margin: 0 20px 50px;
         padding: 22px 20px;
     }
+
+
+    .auth-page {
+        padding: 35px 20px 50px;
+    }
+
+    .auth-header h1 {
+        font-size: 30px;
+    }
+
+    .auth-card {
+        padding: 24px 20px;
+    }
 }
+
 
