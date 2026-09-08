@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-require 'includes/menu.php';
 require 'includes/database.php';
+require 'includes/header.php';
+require 'includes/menu.php';
 
 if (!isset($_SESSION['user_id'])) {
     echo '<p>You need to log in to view your groups.</p>';
@@ -18,16 +19,48 @@ $stmt = $pdo->prepare(
 $stmt->execute([$_SESSION['user_id']]);
 $groups = $stmt->fetchAll();
 
-echo '<h1>My Groups</h1>';
+?>
+<div class="my-groups-header">
+    <span>MY CLUBS</span>
+    <h1>Your football. Your communities.</h1>
+    <p>
+        Jump back into the conversations and communities you follow.
+    </p>
+</div>
 
-if ($groups) {
-    foreach ($groups as $group) {
-        echo '<h2>' . htmlspecialchars($group['name']) . '</h2>';
-        echo '<p>ID: ' . $group['id'] . '</p>';
-        echo '<a href="individual-group.php?id=' . $group['id'] . '">View Group</a>';
-    }
-} else {
-    echo '<p>You are not a member of any groups.</p>';
-}
+<div class="my-groups-list">
 
+<?php if ($groups): ?>
 
+    <?php foreach ($groups as $group): ?>
+
+        <div class="my-group-card">
+
+            <div class="my-group-icon">
+                ⚽
+            </div>
+
+            <div class="my-group-content">
+
+                <h2>
+                    <?= htmlspecialchars($group['name']) ?>
+                </h2>
+
+                <a href="individual-group.php?id=<?= $group['id'] ?>">
+                    Enter club →
+                </a>
+            </div>
+
+        </div>
+
+    <?php endforeach; ?>
+
+<?php else: ?>
+
+    <p>You are not a member of any clubs yet.</p>
+
+<?php endif; ?>
+
+</div>
+
+<?php require 'includes/footer.php'; ?>
