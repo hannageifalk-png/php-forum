@@ -946,6 +946,73 @@ button:hover {
     text-decoration: none;
 }
 
+/* JOIN GROUP */
+
+.invite-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 70px 40px 90px;
+}
+
+.invite-result-card {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 40px;
+
+    text-align: center;
+
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-top: 4px solid #2563eb;
+    border-radius: 10px;
+}
+
+.invite-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+
+    background: #f3f4f6;
+    border-radius: 50%;
+
+    font-size: 28px;
+}
+
+.invite-result-card h1 {
+    margin: 0 0 15px;
+    font-size: 34px;
+}
+
+.invite-result-card p {
+    margin: 0 0 25px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.invite-button {
+    display: inline-block;
+
+    padding: 11px 18px;
+
+    background: #2563eb;
+    color: white;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.invite-button:hover {
+    background: #1d4ed8;
+    color: white;
+    text-decoration: none;
+}
+
 /* WHY JOIN */
 
 .why-join {
@@ -1070,6 +1137,33 @@ button:hover {
 .post-card > p:not(.post-author) {
     margin: 15px 0 0;
     line-height: 1.6;
+}
+
+.invitation-result {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.invitation-result p {
+    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.invitation-result input {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 10px;
+
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+}
+
+.invite-preview-link {
+    display: inline-block;
+    font-weight: bold;
 }
 
 /* AUTH PAGES */
@@ -1707,6 +1801,23 @@ button:hover {
     .auth-card {
         padding: 24px 20px;
     }
+
+    .invite-page {
+        padding: 45px 20px 60px;
+    }
+
+    .invite-result-card {
+        padding: 30px 20px;
+    }
+
+    .invite-result-card h1 {
+        font-size: 30px;
+    }
+
+    .invite-button {
+        width: 100%;
+    }
+
 }
 
 

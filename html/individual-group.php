@@ -255,7 +255,8 @@ if (
     ]);
 
     $invitationLink =
-        'join-group.php?token=' . urlencode($token);
+    'http://localhost:8080/join-group.php?token=' .
+    urlencode($token);
 }
 
 
@@ -606,12 +607,24 @@ require 'includes/menu.php';
                     </form>
 
 
-                    <?php if (isset($invitationLink)): ?>
+                   <?php if (isset($invitationLink)): ?>
 
                         <div class="invitation-result">
 
-                            <a href="<?= htmlspecialchars($invitationLink) ?>">
-                                Join Group →
+                            <p>Invitation link created:</p>
+
+                            <input
+                                type="text"
+                                value="<?= htmlspecialchars($invitationLink) ?>"
+                                readonly
+                                onclick="this.select()"
+                            >
+
+                            <a
+                                href="<?= htmlspecialchars($invitationLink) ?>"
+                                class="invite-preview-link"
+                            >
+                                Open invitation →
                             </a>
 
                         </div>
