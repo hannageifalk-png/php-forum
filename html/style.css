@@ -100,6 +100,7 @@ nav a:hover {
 .user-dropdown li {
     padding: 8px 18px;
     white-space: nowrap;
+    list-style: none;
 }
 
 .user-dropdown .user-welcome {
@@ -412,15 +413,111 @@ button:hover {
     text-decoration: none;
 }
 
+/* INDIVIDUAL GROUP */
+
+.group-page-header {
+    max-width: 900px;
+    margin: 50px auto 35px;
+    padding: 0 40px;
+    text-align: center;
+}
+
+.group-page-header span,
+.section-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: #2563eb;
+}
+
+.group-page-header h1 {
+    margin: 0 0 15px;
+    font-size: 40px;
+}
+
+.group-page-header p {
+    margin: 0;
+    color: #6b7280;
+}
+
+
+/* CREATE DISCUSSION */
+
+.create-post-box {
+    max-width: 700px;
+    margin: 0 auto 50px;
+    padding: 30px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-top: 4px solid #2563eb;
+    border-radius: 10px;
+}
+
+.create-post-box h2 {
+    margin: 0 0 8px;
+}
+
+.create-post-intro {
+    margin: 0 0 25px;
+    color: #6b7280;
+}
+
+.create-post-box form {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.create-post-box textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.create-post-box button {
+    width: 100%;
+}
+
+
 /* DISCUSSIONS */
 
-.discussion-card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin: 15px 40px;
+.discussions-section {
     max-width: 700px;
+    margin: 0 auto 60px;
+    padding: 0;
+}
+
+.discussions-heading {
+    margin-bottom: 20px;
+}
+
+.discussions-heading h2 {
+    margin: 0;
+}
+
+.discussion-card {
+    margin: 0 0 14px;
+    padding: 0;
+
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.discussion-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .07);
+}
+
+.discussion-card a {
+    display: block;
+    padding: 22px;
+    text-decoration: none;
 }
 
 .discussion-card h3 {
@@ -428,29 +525,13 @@ button:hover {
     color: #1f2937;
 }
 
-.discussion-card a {
-    text-decoration: none;
-}
-
 .discussion-card span {
+    font-weight: bold;
     color: #2563eb;
-    font-size: 14px;
 }
 
-.discussion-card:hover {
-    border-color: #bbb;
-}
 
 /* CREATE POST */
-
-.create-post-box {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 24px;
-    margin: 20px 40px;
-    max-width: 700px;
-}
 
 .create-post-box h2 {
     margin-top: 0;
@@ -609,6 +690,91 @@ button:hover {
 
 .member-row select {
     max-width: 180px;
+}
+
+/* CLUB MANAGEMENT */
+
+.club-management {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 40px;
+}
+
+.club-management > h2 {
+    margin: 0 0 20px;
+}
+
+.management-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 18px;
+}
+
+.management-card {
+    padding: 24px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.management-card h3 {
+    margin: 0 0 20px;
+}
+
+.member-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.member-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.member-info p {
+    margin: 0;
+}
+
+.member-row form,
+.request-row form,
+.invite-card form {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.member-row form {
+    display: flex;
+    gap: 8px;
+}
+
+.member-row select {
+    width: auto;
+}
+
+.request-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.empty-message {
+    margin: 0;
+    color: #6b7280;
+}
+
+.invite-card {
+    grid-column: 1 / -1;
+}
+
+.invite-card p {
+    margin: 0 0 18px;
+    color: #6b7280;
 }
 
 /* HERO */
@@ -1096,4 +1262,220 @@ button:hover {
     .create-group-card {
         padding: 25px 20px;
     }
+
+    .group-page-header {
+    margin: 35px auto 30px;
+    padding: 0 20px;
+    }
+
+    .group-page-header h1 {
+        font-size: 32px;
+    }
+
+    .create-post-box,
+    .discussions-section {
+        margin-left: 20px;
+        margin-right: 20px;
+        max-width: none;
+    }
+
+    .create-post-box {
+        padding: 22px;
+    }
+
+
+    .club-management {
+        padding: 0 20px;
+    }
+
+    .management-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .invite-card {
+        grid-column: auto;
+    }
+
+    .member-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    /* INDIVIDUAL GROUP - MOBILE */
+
+    .group-page-header {
+        margin: 35px auto 25px;
+        padding: 0 20px;
+    }
+
+    .group-page-header h1 {
+        margin: 0 0 12px;
+        font-size: 30px;
+    }
+
+    .group-page-header p {
+        margin: 0;
+    }
+
+
+    /* CREATE DISCUSSION */
+
+    .create-post-box {
+        width: auto;
+        max-width: none;
+        margin: 0 20px 40px;
+        padding: 22px 20px;
+    }
+
+    .create-post-box h2 {
+        margin: 0 0 20px;
+        font-size: 22px;
+    }
+
+    .create-post-box form {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .create-post-box input,
+    .create-post-box textarea {
+        width: 100%;
+    }
+
+    .create-post-box button {
+        width: 100%;
+    }
+
+
+    /* DISCUSSIONS */
+
+    .discussions-section {
+        width: auto;
+        max-width: none;
+        margin: 0 20px 45px;
+        padding: 0;
+    }
+
+    .discussions-heading h2 {
+        font-size: 24px;
+    }
+
+    .discussion-card {
+        width: 100%;
+        margin: 0 0 12px;
+    }
+
+    .discussion-card a {
+        padding: 18px;
+    }
+
+
+    /* CLUB MANAGEMENT */
+
+    .club-management {
+        width: auto;
+        max-width: none;
+        margin: 0 20px 50px;
+        padding: 0;
+    }
+
+    .club-management > h2 {
+        font-size: 24px;
+    }
+
+    .management-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .management-card {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .invite-card {
+        grid-column: auto;
+    }
+
+
+    /* MEMBERS */
+
+    .member-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .member-info {
+        width: 100%;
+    }
+
+    .member-row form {
+        display: flex;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .member-row select {
+        flex: 1;
+    }
+
+    .member-row button {
+        width: auto;
+    }
+
+
+    /* REQUESTS */
+
+    .request-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .request-row p {
+        margin: 0;
+    }
+
+    .request-row form {
+        width: 100%;
+    }
+
+    .request-row button {
+        width: 100%;
+    }
+
+
+    /* INVITE */
+
+    .invite-card p {
+        margin: 0 0 18px;
+    }
+
+    .invite-card form {
+        width: 100%;
+    }
+
+    .invite-card button {
+        width: 100%;
+    }
+
+
+    /* NOT A MEMBER */
+
+    .join-club-box {
+        margin: 0 20px 50px;
+    }
+
+    .join-club-box form {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .join-club-box button {
+        width: 100%;
+    }
 }
+
