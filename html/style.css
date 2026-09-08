@@ -325,6 +325,93 @@ button:hover {
     text-decoration: underline;
 }
 
+/* THE STANDS */
+
+.groups-header {
+    max-width: 900px;
+    margin: 50px auto 30px;
+    padding: 0 40px;
+    text-align: center;
+}
+
+.groups-header span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: #2563eb;
+}
+
+.groups-header h1 {
+    margin: 0 0 15px;
+    font-size: 38px;
+}
+
+.groups-header p {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.groups-list {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 40px;
+}
+
+.discover-group-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    margin-bottom: 18px;
+    padding: 24px;
+
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #2563eb;
+    border-radius: 10px;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.discover-group-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.discover-group-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+    flex-shrink: 0;
+
+    background-color: #f3f4f6;
+    border-radius: 50%;
+
+    font-size: 26px;
+}
+
+.discover-group-content h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+}
+
+.discover-group-content p {
+    margin: 0 0 10px;
+    color: #6b7280;
+}
+
+.discover-group-content a {
+    font-weight: bold;
+    color: #2563eb;
+    text-decoration: none;
+}
+
 /* DISCUSSIONS */
 
 .discussion-card {
@@ -374,6 +461,29 @@ button:hover {
     padding: 0;
     border: none;
     background: none;
+}
+
+/* CREATE CLUB */
+
+.create-club-button {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 11px 18px;
+
+    background-color: #2563eb;
+    color: white;
+
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.create-club-button:hover {
+    background-color: #1d4ed8;
+    text-decoration: none;
+    transform: translateY(-2px);
 }
 
 /* ADMIN */
@@ -874,5 +984,22 @@ button:hover {
         width: 48px;
         height: 48px;
         font-size: 22px;
+    }
+
+    .groups-header {
+    margin: 35px auto 25px;
+    padding: 0 20px;
+    }
+
+    .groups-header h1 {
+        font-size: 30px;
+    }
+
+    .groups-list {
+        padding: 0 20px;
+    }
+
+    .discover-group-card {
+        padding: 20px;
     }
 }

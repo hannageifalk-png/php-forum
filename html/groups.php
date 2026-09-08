@@ -1,45 +1,58 @@
 <?php
 session_start();
 
-require 'includes/menu.php';
 require 'includes/database.php';
 require 'includes/functions.php';
+require 'includes/header.php';
+require 'includes/menu.php';
 
-$myGroups = getMyGroups();
-?>
-<h1>My Groups</h1>
-
-<a href="create-group.php">Create Group</a>
-<ul>
-
-<?php
-foreach ($myGroups as $group) {
-    ?>
-    <li>
-        <a href="individual-group.php?id=<?= $group['id']; ?>">
-    <?= $group['name']; ?>
-</a>
-    </li>
-    <?php
-}
-?>
-
-</ul>
-
-<?php
 $stmt = $pdo->prepare("SELECT * FROM groups");
 $stmt->execute();
 
 $groups = $stmt->fetchAll();
+?>
 
-foreach ($groups as $group) {
-    echo '<div class="group-card">';
+<div class="groups-header">
+    <span>THE STANDS</span>
+    <h1>Find your corner of football.</h1>
 
-    echo '<h2>' . htmlspecialchars($group['name']) . '</h2>';
+    <p>
+        Discover supporter groups, football topics and communities
+        and join the conversations that interest you.
+    </p>
 
-    echo '<a class="view-group" href="individual-group.php?id=' . $group['id'] . '">
-            View group
-          </a>';
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <a href="/create-group.php" class="create-club-button">
+            + Start a Club
+        </a>
+    <?php endif; ?>
+</div>
 
-    echo '</div>';
-}
+<div class="groups-list">
+
+<?php 
+foreach ($groups as $group): ?>
+
+    <div class="discover-group-card">
+
+        <div class="discover-group-icon">
+            ⚽
+        </div>
+
+        <div class="discover-group-content">
+            <h2><?= htmlspecialchars($group['name']) ?></h2>
+
+            <p>Join the conversation</p>
+
+            <a href="individual-group.php?id=<?= $group['id'] ?>">
+                View club →
+            </a>
+        </div>
+
+    </div>
+
+<?php endforeach; ?>
+
+<?php
+include 'includes/footer.php'; 
+?>
