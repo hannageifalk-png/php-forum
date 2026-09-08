@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id'])) {
     <ul id="nav-menu" class="nav-links">
 
         <li>
-            <a href="/groups.php">Explore</a>
+            <a href="/groups.php">The stands</a>
         </li>
 
         <?php if (isset($_SESSION['user_id'])): ?>
