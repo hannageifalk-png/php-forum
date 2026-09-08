@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id'])) {
     <div class="nav-top">
 
         <a href="/index.php" class="nav-brand">
-            Football Forum
+            Forza Football
         </a>
 
         <button class="menu-toggle" type="button" aria-label="Open menu">
@@ -31,28 +31,32 @@ if (isset($_SESSION['user_id'])) {
     <ul id="nav-menu" class="nav-links">
 
         <li>
-            <a href="/groups.php">Groups</a>
+            <a href="/groups.php">Explore</a>
         </li>
 
         <?php if (isset($_SESSION['user_id'])): ?>
 
             <li>
-                <a href="/my-groups.php">My Groups</a>
+                <a href="/my-groups.php">My Clubs</a>
             </li>
 
             <li>
-                <a href="/create-group.php">Create Group</a>
+                <a href="/create-group.php">Start a Club</a>
             </li>
 
-            <?php if ($loggedInUser): ?>
-                <li class="logged-in-user">
-                    Welcome, <?= htmlspecialchars($loggedInUser['first_name']) ?>
-                </li>
-            <?php endif; ?>
+           <?php if ($loggedInUser): ?>
+            <li class="user-menu">
+                <button class="user-menu-button" type="button">
+                    <?= htmlspecialchars($loggedInUser['first_name']) ?> ▾
+                </button>
 
-            <li>
-                <a href="/logout.php">Log out</a>
+                <ul class="user-dropdown">
+                    <li>
+                        <a href="/logout.php">Log out</a>
+                    </li>
+                </ul>
             </li>
+        <?php endif; ?>
 
         <?php else: ?>
 
@@ -77,5 +81,15 @@ if (isset($_SESSION['user_id'])) {
 
     menuButton.addEventListener('click', function () {
         navMenu.classList.toggle('open');
+        
     });
+    const userMenuButton = document.querySelector('.user-menu-button');
+    const userMenu = document.querySelector('.user-menu');
+        
+        if (userMenuButton && userMenu) {
+            userMenuButton.addEventListener('click', function () {
+                userMenu.classList.toggle('open');
+            });
+        }
 </script>
+

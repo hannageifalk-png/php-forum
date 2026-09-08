@@ -28,16 +28,6 @@ nav a:hover {
     text-decoration: underline;
 }
 
-nav ul {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    min-height: 65px;
-}
-
 
 .logged-in-user {
     margin: 0;
@@ -67,6 +57,58 @@ nav ul {
     list-style: none;
     margin: 0 0 0 auto;
     padding: 0;
+    min-height: 65px;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-menu-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+}
+
+.user-menu-button:hover {
+    background: none;
+}
+
+.user-menu .user-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+
+    display: none;
+
+    min-width: 170px;
+    padding: 12px 0;
+    margin-top: 15px;
+
+    background: #1f2937;
+    border-radius: 6px;
+}
+
+.user-menu.open .user-dropdown {
+    display: block;
+}
+
+.user-dropdown li {
+    padding: 8px 18px;
+    white-space: nowrap;
+}
+
+.user-dropdown .user-welcome {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.user-dropdown a {
+    color: white;
 }
 
 /* GENERAL TYPOGRAPHY */
