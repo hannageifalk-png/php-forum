@@ -530,6 +530,117 @@ button:hover {
     color: #2563eb;
 }
 
+/* DISCUSSION PAGE */
+
+.discussion-page-header {
+    max-width: 760px;
+    margin: 50px auto 35px;
+    padding: 0 40px;
+}
+
+.discussion-page-header > span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: #2563eb;
+}
+
+.discussion-page-header h1 {
+    margin: 0 0 15px;
+    font-size: 36px;
+}
+
+.back-to-club {
+    font-weight: bold;
+}
+
+
+/* THREAD */
+
+.discussion-thread {
+    max-width: 760px;
+    margin: 0 auto 45px;
+    padding: 0 40px;
+}
+
+.post-card {
+    margin: 0 0 16px;
+    padding: 24px;
+
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.post-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.post-author .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.post-author strong {
+    display: block;
+    color: #1f2937;
+}
+
+.post-date {
+    display: block;
+    margin-top: 3px;
+
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+.post-content {
+    line-height: 1.7;
+    color: #374151;
+}
+
+
+/* REPLY */
+
+.reply-box {
+    max-width: 680px;
+    margin: 0 auto 60px;
+    padding: 28px;
+
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-top: 4px solid #2563eb;
+    border-radius: 10px;
+}
+
+.reply-box h2 {
+    margin: 0 0 20px;
+}
+
+.reply-box form {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+
+    background: none;
+    border: none;
+}
+
+.reply-box textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.reply-box button {
+    width: 100%;
+}
 
 /* CREATE POST */
 
@@ -1476,6 +1587,28 @@ button:hover {
 
     .join-club-box button {
         width: 100%;
+    }
+
+    .discussion-page-header {
+        margin: 35px auto 25px;
+        padding: 0 20px;
+    }
+
+    .discussion-page-header h1 {
+        font-size: 30px;
+    }
+
+    .discussion-thread {
+        padding: 0 20px;
+    }
+
+    .post-card {
+        padding: 20px;
+    }
+
+    .reply-box {
+        margin: 0 20px 50px;
+        padding: 22px 20px;
     }
 }
 
