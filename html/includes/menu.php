@@ -73,8 +73,6 @@ if (isset($_SESSION['user_id'])) {
     </ul>
 </nav>
 
-<link rel="stylesheet" href="/style.css">
-
 <script>
     const menuButton = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('#nav-menu');
