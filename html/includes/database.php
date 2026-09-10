@@ -1,19 +1,21 @@
 <?php
 
 $host = getenv('DB_HOST');
-$dbname = 'community_forum';
+$port = getenv('DB_PORT');
+$dbname = getenv('DB_NAME');
 $user = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 
-$dsn = "mysql:host=$host;dbname=$dbname";
-
-$pdo = new PDO($dsn, $user, $password);
+$dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
 
 try {
     $pdo = new PDO($dsn, $user, $password);
+
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } 
 catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
+    echo 'Connection failed.';
     exit;
 }
 
