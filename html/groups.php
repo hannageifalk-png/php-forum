@@ -6,7 +6,7 @@ require 'includes/functions.php';
 require 'includes/header.php';
 require 'includes/menu.php';
 
-$stmt = $pdo->prepare("SELECT * FROM groups");
+$stmt = $pdo->prepare("SELECT * FROM `groups`");
 $stmt->execute();
 
 $groups = $stmt->fetchAll();

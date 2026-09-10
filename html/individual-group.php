@@ -7,7 +7,7 @@ require_once 'includes/functions.php';
 $groupId = $_GET['id'] ?? null;
 
 $stmt = $pdo->prepare(
-    "SELECT * FROM groups WHERE id = ?"
+    "SELECT * FROM `groups` WHERE id = ?"
 );
 $stmt->execute([$groupId]);
 $group = $stmt->fetch();
@@ -373,7 +373,7 @@ if (
         /* DELETE GROUP */
 
         $deleteGroupStmt = $pdo->prepare(
-            "DELETE FROM groups
+            "DELETE FROM `groups`
              WHERE id = ?"
         );
 

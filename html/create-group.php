@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
     if ($groupName) {
 
         $stmt = $pdo->prepare(
-            "INSERT INTO groups (name, created_by) VALUES (?, ?)"
+            "INSERT INTO `groups` (name, created_by) VALUES (?, ?)"
         );
 
         $stmt->execute([

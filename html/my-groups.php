@@ -11,9 +11,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $stmt = $pdo->prepare(
-    "SELECT groups.*
-     FROM groups
-     JOIN users_groups ON groups.id = users_groups.group_id
+    "SELECT `groups`.*
+     FROM `groups`
+     JOIN users_groups ON `groups`.id = users_groups.group_id
      WHERE users_groups.user_id = ?"
 );
 $stmt->execute([$_SESSION['user_id']]);
